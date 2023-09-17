@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LycorisHQ FAQ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background-color: rgb(213, 213, 213);
+            font-family: "Noto Sans JP", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: rgb(8, 157, 8);
+        }
+
+        header {
+            text-align: center;
+        }
+
+        .answers {
+            width: 70vw;
+            margin-left: 15vw;
+        }
+
+        .answer {
+            display: none;
+            padding: 2vw;
+            background: rgb(238, 238, 238);
+            border: 1px solid black;
+        }
+
+        .answer h3 {
+            font-style: italic;
+        }
+
+        .quotation {
+            padding: 0.5vw;
+            background-color: white;
+        }
+
+        .quotation p {
+            font-style: italic;
+        }
+
+        .quotation a {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Welcome to this "Totally Frequent Asked Questions" page.</h2>
+        <p>
+            To clarify, this page was created mainly to pre-answer questions I'll
+            probably get in the future.
+        </p>
+    <script>
+        function Select(event) {
+            let target = event.target
+            if (!(target instanceof HTMLSelectElement)) {
+                console.error("Not a select element.");
+                return;
+            }
+            let selected = target.options[target.selectedIndex];
+            let elms = document.querySelectorAll(".answer");
+            elms.forEach(function(e) {
+                e.style.display = "none";
+            });
+            document.querySelector("#"+selected.className).style.display = "block";
+        }
+    </script>
+        <p>Select your question:
+            <select id="question-select" onchange="Select(event)">
+                <option class="answer-1">Why is this page hosted in github pages instead of my server machine?</option>
+                <option class="answer-2">Why does LycorisHQ not support IPv4?</option>
+                <option class="answer-3">Why use Haxe as a server backend?</option>
+                <option class="answer-4">Why are you such a weeb?</option>
+            </select>
+        </p>
+    </header>
+
+    <div class="answers">
+        <div id="answer-1" class="answer" style="display:block">
+            <h3>My server is only accessible through IPv6.</h3>
+            <p>I cannot guarantee that every single one who accesses this website even has access to the IPv6 internet, and therefore,
+                hosting this page on my server would not only be a pretty bad idea (see answer of question Number 2) but also pointless.
+            </p>
+        </div>
+        <div id="answer-2" class="answer">
+            <h2>There are a few reasons for that, so lets just go through all of them, one by one:</h2>
+            <h3>IPv4 is held together by duct tape and super glue.</h3>
+            <p>
+                You may have head of the term "NAT", stands for Network Address Translation, it's a method of 
+                mapping one address space to another.
+                IPv4 can support approximately 4.2 billion unique addresses, which may sound like a large number,
+                but when you realize that there's roughly 11.3 billion devices connected to the internet as of 2021!
+            </p>
+            <h3>One-to-many NAT, the "duct tape".</h3>
+            <div class="quotation">
+                <p>
+                    “The Internet has grown beyond anyone's expectations. Sustained exponential growth continues to introduce new challenges. One challenge is a concern within the community that globally unique address space will be exhausted.” 
+                </p>
+                <div class="author">– <a href="https://datatracker.ietf.org/doc/html/rfc1918">RFC-1918, February, 1996</a>.</div>
+            </div>
+            <p>To free-up more IPv4s, RFC-1918 created what its known as "Private Address Space", or also "Local Network",
+            essentially, now your house and every device on it is represented by a single public IPv4 address.
+            and to make anything on your house accessible to the outside world you'll have to perform what's known as <a href="https://en.wikipedia.org/wiki/Port_forwarding">Port Forwarding</a>.
+            Port forwarding, of course, is slower than just directly communicating with the server, but hey, it works!
+            </p>
+            <h3>IPv6, the future of IP.</h3>
+            <p>The <span style="font-weight: bold;">I</span>nternet <span style="font-weight: bold;">P</span>rotocol <span style="font-weight: bold;">v</span>ersion <span style="font-weight: bold;">6</span> 
+            was originally showcased in 1995 (one year before RFC-1918), unlike IPv4's 32-bit addresses, IPv6 uses 128-bit addresses, technically allowing 2^128 IPs, the actual number is slightly smaller of course as some ranges may be reserved,
+            but hey! that's a number so large that humanity might stop existing before we even exhaust that number of IPs!
+            </p>
+            <p>Without the need for NATs and port forwarding, the only thing stopping people from acessing your servers and machines is your firewall!</p>
+            <h3>We screwed up.</h3>
+            <p>This idea of private networks was created to be a short term duct tape to buy more time while deploying IPv6, however...</p>
+            <p>ISPs simply began getting way too good in deploying NATs, to the point that today, ISPs are even placing their clients over 2 NATs!
+                effectively making port forwarding impossible and requiring you to pay extra for a dedicated IP address for your house (which is my case).
+                Nowadays NATs went from a short term duct tape to straight up super glue.
+            </p>
+            <h3>Why LycorisHQ will always remain IPv6-only.</h3>
+            <p>For the future of the internet, <i>and because I'm a poor highschool student</i> LycorisHQ will only be available for the IPv6 internet, even if that means losing possible visitors.
+            </p>
+            <h4>But I really want to access that website!</h4>
+            <p>Don't worry! you can use a tunnelbroker service to get access to the IPv6 internet, even if your ISP doesn't support IPv6,
+            or, you can try contacting them.
+            </p>
+        </div>
+        <div id="answer-3" class="answer">
+            <h3>I know, you may know me as the "D programming language" guy, but hear me out</h3>
+            <p><span style="font-weight: bold;color:red">D</span> is a cool programming language, yes, but I preferred something more dynamic and more known for web-related stuff.
+                So, I went with Node.js and TypeScript originally, until... well. I got bored of TypeScript.
+            </p>
+            <p>Haxe is a pretty cool language toolkit, and I have a lot of fun using it for web related stuff so, why not use it for my beloved website?
+            </p>
+            <p>
+                <i>Fun fact: My mail server is actually written in TypeScript.</i>
+            </p>
+        </div>
+        <div id="answer-4" class="answer">
+            <h3>I have no idea</h3>
+            <p>I don't know how it started, nor when it began, but early on my life, I was quite a fan of Naruto, nowadays I don't like it at all, and then I moved onto Angel Beats! and became whatever I am today.</p>
+        </div>
+    </div>
+</body>
+</html>
